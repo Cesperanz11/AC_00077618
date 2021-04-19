@@ -4,6 +4,7 @@
 
 	;Primero insertare las iniciales de mi nombre en las memorias asignadas;
 	;Mi nombre es Cesar Eduardo Esperanza Ulloa
+	; antepongo la palabra byte para hacer saber que el tamanho de el lado izquierdo es de 8 bits
 
 	mov	byte [200h], "C"
 	mov	byte [201h], "E"
@@ -13,7 +14,7 @@
 	;Haciendo direccionamiento directo o absoluto (de una celda de memoria a un registro o viceversa)
 	;Mandar info de 200h a AX
 
-	mov	AL, [200h]
+	mov	byte AX, [200h]
 
 	;Haciendo direccionamiento indirecto por registro 
 	;(de una celda de memoria[BX] a un registro o viceversa, ocupando BX como el lugar que tiene guardada la direccion de memoria a ocupar)
