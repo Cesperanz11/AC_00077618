@@ -14,7 +14,7 @@
 	;Haciendo direccionamiento directo o absoluto (de una celda de memoria a un registro o viceversa)
 	;Mandar info de 200h a AX
 
-	mov	byte AX, [200h]
+	mov	AL, [200h]
 
 	;Haciendo direccionamiento indirecto por registro 
 	;(de una celda de memoria[BX] a un registro o viceversa, ocupando BX como el lugar que tiene guardada la direccion de memoria a ocupar)
