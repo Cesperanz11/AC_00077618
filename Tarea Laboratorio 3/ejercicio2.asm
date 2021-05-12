@@ -3,13 +3,18 @@
 	section	.text
 
 	xor	AX, AX ; Limpio AX de cualquier valor que haya quedado almacenado ahi
+	xor	CX, CX ; Limpio CX de cualquier valor que haya quedado almacenado ahi
 	mov	CL, 5d ; Inicializamos nuestro contador en CL
 	mov	AL, 1d ; Con esto nos aseguramos de que AL (donde se guardan las multiplicaciones, tenga un colchon
 	; ya que si tuviese un 0, todo numero que mandasemos a multiplicar se haria 0)
 	call	factorial ; Mandamos a llamar a la funcion que tiene el codigo necesario
 
-	mul	1d ; Aqui en esta instancia ya tenemos AL con casi todo el resultado de (n)! pero le falta 0!, que vale 1
-			; Es algo tribial pero no deja de ser necesario matematicamente
+	; Aqui en esta instancia ya tenemos AL con casi todo el resultado de (n)! pero le falta 0!, que vale 1
+	; Es algo tribial pero no deja de ser necesario matematicamente
+	mov	CH, 1d ; Ocupo CH para marcar la diferencia de que es un numero distinto a los utilizados antes
+	mul	CH
+
+	mov	[20Bh], AL ; Mandamos el resultado de n! ya completo a la celda de memoria 20Bh (da 120d equivalente a 78h)
 
 	jmp	exit ; Nos vamos a un apartado especial en el cual solo se encuentra el codigo que finaliza el programa
 
