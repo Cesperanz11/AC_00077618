@@ -29,7 +29,7 @@
 ; DATOS
 	section	.data
 
-array	db	10,09,08   ;,07,06,05,04,03,02,01 ; Este es el arreglo de numeros de 1 bits que hemos creado
+array	db	10,09,08,07,06,05,04,03,02,01 ; Este es el arreglo de numeros de 1 bits que hemos creado
 divisor	equ	2 ; Este es un valor constante que nos indica cual es el valor de nuestro divisor
 
 
@@ -39,7 +39,7 @@ divisor	equ	2 ; Este es un valor constante que nos indica cual es el valor de nu
 ;Esta es la subrutina principal
 Iterador:
 
-	cmp	SI, 3  ;10	; Aqui comparamos nuestro registro contador para ver si ya llegamos a nuestro limite de datos a iterar
+	cmp	SI, 10	; Aqui comparamos nuestro registro contador para ver si ya llegamos a nuestro limite de datos a iterar
 	JE	return_function	; Aqui vamos a decir, de que en caso de que el contador sea igual al valor que hemos dicho, hara un RET y regresara al Main
 			; De no ser igual, va a continuar su curso
 
