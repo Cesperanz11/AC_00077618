@@ -5,14 +5,14 @@ org	100h
 	section	.text
 
 	;Funcion main
-	xor	AX, AX
-	xor	BX, BX
-	xor	CX, CX
-	xor	DX, DX
-	xor	SI, SI
+	xor	AX, AX	; aqui limpiamos nuestro registro AX
+	xor	BX, BX	; aqui limpiamos nuestro registro BX
+	xor	CX, CX	; aqui limpiamos nuestro registro CX
+	xor	DX, DX	; aqui limpiamos nuestro registro DX
+	xor	SI, SI	; aqui limpiamos nuestro puntero SI
 
 	;Aqui llamaremos al modo texto con las especificaciones deseadas
-	call modotexto ; solo debemos de llamarlo una vez, sino se borrara toda la pantalla
+	call modotexto ; solo debemos de llamarlo una vez, sino se borrara/limpiara toda la pantalla
 
 	;ESCRIBIENDO PRIMER NOMBRE
 
@@ -20,8 +20,8 @@ org	100h
 	MOV	SI, 0
 	MOV	DI, 0d
 
-	call movercursor1
-	call escribirprimer_nombre
+	call movercursor1	; esta funcion se encarga de mover el cursor a la posicion en que se escribira el primer nombre
+	call escribirprimer_nombre	; esta funcion se encarga de escribir todo el primer nombre de una sola vez, no va caracter por caracter
 
 	;ESCRIBIENDO SEGUNDO NOMBRE
 
@@ -29,8 +29,8 @@ org	100h
 	MOV	SI, 0
 	MOV	DI, 0d
 
-	call movercursor2
-	call escribirsegundo_nombre
+	call movercursor2	; esta funcion se encarga de mover el cursor a la posicion en que se escribira el segundo nombre
+	call escribirsegundo_nombre	; esta funcion se encarga de escribir todo el segundo nombre de una sola vez, no va caracter por caracter
 
 	;ESCRIBIENDO PRIMER APELLIDO
 
@@ -38,8 +38,8 @@ org	100h
 	MOV	SI, 0
 	MOV	DI, 0d
 
-	call movercursor3
-	call escribirprimer_apellido
+	call movercursor3	; esta funcion se encarga de mover el cursor a la posicion en que se escribira el primer apellido
+	call escribirprimer_apellido	; esta funcion se encarga de escribir todo el primer apellido de una sola vez, no va caracter por caracter
 
 	;ESCRIBIENDO SEGUNDO APELLIDO
 
@@ -47,14 +47,14 @@ org	100h
 	MOV	SI, 0
 	MOV	DI, 0d
 
-	call movercursor4
-	call escribirsegundo_apellido
+	call movercursor4	; esta funcion se encarga de mover el cursor a la posicion en que se escribira el segundo apellido
+	call escribirsegundo_apellido	; esta funcion se encarga de escribir todo el segundo apellido de una sola vez, no va caracter por caracter
 
 
 
 	;Terminando el programa
-	call esperartecla
-	call exit
+	call esperartecla	; esta funcion es nuestra señal para terminar el programa
+	call exit	; con esta funcion se termina el programa
 
 	;Aqui van todas las declaraciones de variables
 	section	.data
@@ -70,7 +70,7 @@ org	100h
 modotexto: 
         MOV AH, 0h ; activa el modo video/texto
         MOV AL, 03h ; modo gráfico deseado, 03h denota un tamaño de pantalla de 80x25 (80 columnas, 25 filas)
-        INT 10h
+        INT 10h	; interrupcion del BIOS
         RET
 
 movercursor1:
@@ -78,7 +78,7 @@ movercursor1:
 	MOV DH, 10 ; fila en la que se mostrará el cursor
         MOV DL, 20 ; columna en la que se mostrará el cursor
         MOV BH, 0h ; número de página del cursor
-        INT 10h
+        INT 10h	; interrupcion del BIOS
         RET
 
 movercursor2:
@@ -86,7 +86,7 @@ movercursor2:
 	MOV DH, 12 ; fila en la que se mostrará el cursor
         MOV DL, 20 ; columna en la que se mostrará el cursor
         MOV BH, 0h ; número de página del cursor
-        INT 10h
+        INT 10h	; interrupcion del BIOS
         RET
 
 movercursor3:
@@ -94,7 +94,7 @@ movercursor3:
 	MOV DH, 14 ; fila en la que se mostrará el cursor
         MOV DL, 20 ; columna en la que se mostrará el cursor
         MOV BH, 0h ; número de página del cursor
-        INT 10h
+        INT 10h	; interrupcion del BIOS
         RET
 
 movercursor4:
@@ -102,32 +102,32 @@ movercursor4:
 	MOV DH, 16 ; fila en la que se mostrará el cursor
         MOV DL, 20 ; columna en la que se mostrará el cursor
         MOV BH, 0h ; número de página del cursor
-        INT 10h
+        INT 10h	; interrupcion del BIOS
         RET
 
 
 escribirprimer_nombre: ;utilizando interrupcion DOS
         MOV AH, 09h ; esto establece que queremos que se escriba una cadena en pantalla según posición del cursor
         MOV DX, primer_nombre ; cadena que vamos a imprimir, debe ir sin corchetes
-        INT 21h
+        INT 21h	; interrupcion del DOS
         RET
 
 escribirsegundo_nombre: ;utilizando interrupcion DOS
         MOV AH, 09h ; esto establece que queremos que se escriba una cadena en pantalla según posición del cursor
         MOV DX, segundo_nombre ; cadena que vamos a imprimir, debe ir sin corchetes
-        INT 21h
+        INT 21h	; interrupcion del DOS
         RET
 
 escribirprimer_apellido: ;utilizando interrupcion DOS
         MOV AH, 09h ; esto establece que queremos que se escriba una cadena en pantalla según posición del cursor
         MOV DX, primer_apellido ; cadena que vamos a imprimir, debe ir sin corchetes
-        INT 21h
+        INT 21h	; interrupcion del DOS
         RET
 
 escribirsegundo_apellido: ;utilizando interrupcion DOS
         MOV AH, 09h ; esto establece que queremos que se escriba una cadena en pantalla según posición del cursor
         MOV DX, segundo_apellido ; cadena que vamos a imprimir, debe ir sin corchetes
-        INT 21h
+        INT 21h	; interrupcion del DOS
         RET
 
 esperartecla:
