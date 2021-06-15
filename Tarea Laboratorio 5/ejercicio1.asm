@@ -4,7 +4,7 @@ org	100h
 	;Aqui va todo el codigo principal
 	section	.text
 
-	;Funcion main
+	;FUNCION MAIN
 	xor	AX, AX	; aqui limpiamos nuestro registro AX
 	xor	BX, BX	; aqui limpiamos nuestro registro BX
 	xor	CX, CX	; aqui limpiamos nuestro registro CX
@@ -56,6 +56,8 @@ org	100h
 	call esperartecla	; esta funcion es nuestra señal para terminar el programa
 	call exit	; con esta funcion se termina el programa
 
+
+	;DATOS	
 	;Aqui van todas las declaraciones de variables
 	section	.data
 
@@ -65,6 +67,7 @@ org	100h
 	segundo_apellido DB "Ulloa$"
 
 
+	;FUNCIONES
 	;Aqui van todas las funciones
 
 modotexto: 
