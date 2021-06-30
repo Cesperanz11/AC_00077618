@@ -31,6 +31,7 @@ EsperarTecla:
 ; Salida:       SI: longitud de la cadena
 LeerCadena:
         xor     SI, SI          ; SI = 0
+
 while:  
         call    EsperarTecla    ; retorna un caracter en AL
         cmp     AL, 0x0D        ; comparar AL con caracter EnterKey
@@ -43,8 +44,11 @@ while:
 VerificarCadena:
 	;mov 	byte [300h+SI], "$"	; agregar $ al final de la cadena
 	xor     SI, SI          ; SI = 0
-	xor     DI, DI          ; DI = 0
+	xor     DI, DI  
+	
+	        ; DI = 0
 	jmp 	for
+	
 for:	
 	MOV AL, [passw+DI]
 	cmp AL, [300h+SI]
@@ -53,7 +57,7 @@ for:
 	INC DI
 	loop for
 
-        call EscribirCadenaBuena;
+    call EscribirCadenaBuena;
 	jmp exit
 
 
@@ -65,6 +69,7 @@ EscribirCadenaBuena:
 	mov 	AH, 09h
 	mov 	DX, bueno	; dirección inicial de nuestra cadena
 	int 	21h
+	
 	ret
 
 
@@ -72,7 +77,8 @@ EscribirCadenaMala:
 	mov 	AH, 09h
 	mov 	DX, malo	; dirección inicial de nuestra cadena
 	int 	21h
-	ret
+	
+	int 20h ; 
 
 exit:
 	int 20h;
